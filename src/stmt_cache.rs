@@ -78,7 +78,7 @@ impl<S, DB: Backend> StmtCache<DB, S> {
                     .on_connection_event(InstrumentationEvent::cache_query(&sql));
                 let f = async move {
                     let statement = prepare_fn
-                        .prepare(&sql, &metadata, PrepareForCache::Yes)
+                        .prepare(&sql, &metadata, PrepareForCache::Yes{ counter: 0 })
                         .await?;
 
                     Ok((MaybeCached::Cached(entry.insert(statement.0)), statement.1))

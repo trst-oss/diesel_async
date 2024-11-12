@@ -187,6 +187,10 @@ mod implementation {
         fn set_instrumentation(&mut self, instrumentation: impl Instrumentation) {
             self.inner.set_instrumentation(instrumentation);
         }
+
+        fn set_prepared_statement_cache_size(&mut self, _: diesel::connection::CacheSize) {
+            
+        }
     }
 
     impl<C, B> diesel::connection::LoadConnection for AsyncConnectionWrapper<C, B>
